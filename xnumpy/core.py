@@ -235,7 +235,7 @@ def expand(new_array,
     return(new_array_expanded)
 
 
-def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
+def anumerate(new_array, axis=0, start=0, step=1, dtype=None):
     """
         Builds on expand_arange, which has the same shape as the original
         array. Specifies the increments to occur along the given axis, which by
@@ -255,7 +255,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
             (numpy.ndarray):                     a view of a numpy arange with
                                                  tiling in various dimension.
         Examples:
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64)
             ... )
             array([[0, 0, 0, 0, 0],
@@ -263,7 +263,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
                    [2, 2, 2, 2, 2],
                    [3, 3, 3, 3, 3]], dtype=uint64)
 
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64),
             ...     axis=0
             ... )
@@ -272,7 +272,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
                    [2, 2, 2, 2, 2],
                    [3, 3, 3, 3, 3]], dtype=uint64)
 
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64),
             ...     axis=0,
             ...     start=1
@@ -282,7 +282,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
                    [3, 3, 3, 3, 3],
                    [4, 4, 4, 4, 4]], dtype=uint64)
 
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64),
             ...     axis=0,
             ...     start=1,
@@ -293,7 +293,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
                    [5, 5, 5, 5, 5],
                    [7, 7, 7, 7, 7]], dtype=uint64)
 
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64),
             ...     axis=1
             ... )
@@ -302,7 +302,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
                    [0, 1, 2, 3, 4],
                    [0, 1, 2, 3, 4]], dtype=uint64)
 
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64),
             ...     axis=1,
             ...     start=1
@@ -312,7 +312,7 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
                    [1, 2, 3, 4, 5],
                    [1, 2, 3, 4, 5]], dtype=uint64)
 
-            >>> enumerate(
+            >>> anumerate(
             ...     numpy.ones((4,5), dtype=numpy.uint64),
             ...     axis=1,
             ...     start=1,
