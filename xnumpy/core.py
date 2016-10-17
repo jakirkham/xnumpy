@@ -220,3 +220,111 @@ def expand(new_array,
     new_array_expanded.flags["WRITEABLE"] = not read_only
 
     return(new_array_expanded)
+
+
+def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
+    """
+        Builds on expand_arange, which has the same shape as the original
+        array. Specifies the increments to occur along the given axis, which by
+        default is the zeroth axis.
+        Provides mechanisms for changing the starting value and also the
+        increment.
+        Args:
+            new_array(numpy.ndarray):            array to enumerate
+            start(int):                          starting point (0 by default).
+            step(int):                           size of steps to take between
+                                                 value (1 by default).
+            axis(int):                           axis to enumerate along (0 by
+                                                 default).
+            dtype(type):                         type to use for enumerating.
+
+        Returns:
+            (numpy.ndarray):                     a view of a numpy arange with
+                                                 tiling in various dimension.
+        Examples:
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64)
+            ... )
+            array([[0, 0, 0, 0, 0],
+                   [1, 1, 1, 1, 1],
+                   [2, 2, 2, 2, 2],
+                   [3, 3, 3, 3, 3]], dtype=uint64)
+
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64),
+            ...     axis=0
+            ... )
+            array([[0, 0, 0, 0, 0],
+                   [1, 1, 1, 1, 1],
+                   [2, 2, 2, 2, 2],
+                   [3, 3, 3, 3, 3]], dtype=uint64)
+
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64),
+            ...     axis=0,
+            ...     start=1
+            ... )
+            array([[1, 1, 1, 1, 1],
+                   [2, 2, 2, 2, 2],
+                   [3, 3, 3, 3, 3],
+                   [4, 4, 4, 4, 4]], dtype=uint64)
+
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64),
+            ...     axis=0,
+            ...     start=1,
+            ...     step=2
+            ... )
+            array([[1, 1, 1, 1, 1],
+                   [3, 3, 3, 3, 3],
+                   [5, 5, 5, 5, 5],
+                   [7, 7, 7, 7, 7]], dtype=uint64)
+
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64),
+            ...     axis=1
+            ... )
+            array([[0, 1, 2, 3, 4],
+                   [0, 1, 2, 3, 4],
+                   [0, 1, 2, 3, 4],
+                   [0, 1, 2, 3, 4]], dtype=uint64)
+
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64),
+            ...     axis=1,
+            ...     start=1
+            ... )
+            array([[1, 2, 3, 4, 5],
+                   [1, 2, 3, 4, 5],
+                   [1, 2, 3, 4, 5],
+                   [1, 2, 3, 4, 5]], dtype=uint64)
+
+            >>> enumerate(
+            ...     numpy.ones((4,5), dtype=numpy.uint64),
+            ...     axis=1,
+            ...     start=1,
+            ...     step=2
+            ... )
+            array([[1, 3, 5, 7, 9],
+                   [1, 3, 5, 7, 9],
+                   [1, 3, 5, 7, 9],
+                   [1, 3, 5, 7, 9]], dtype=uint64)
+    """
+
+    if dtype is None:
+        dtype = new_array.dtype
+
+    dtype = numpy.dtype(dtype)
+
+    an_enumeration = expand(
+        numpy.arange(
+            start=start,
+            stop=start + step * new_array.shape[axis],
+            step=step,
+            dtype=dtype
+        ),
+        shape_before=new_array.shape[:axis],
+        shape_after=new_array.shape[(axis+1):]
+    )
+
+    return(an_enumeration)
