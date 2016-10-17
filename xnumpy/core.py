@@ -341,3 +341,130 @@ def enumerate(new_array, axis=0, start=0, step=1, dtype=None):
     )
 
     return(an_enumeration)
+
+
+def product(arrays):
+    """
+        Takes the cartesian product between the elements in each array.
+
+        Args:
+            arrays(collections.Sequence of numpy.ndarrays):     A sequence of
+                                                                1-D arrays or
+                                                                a 2-D array.
+
+        Returns:
+            (numpy.ndarray):                                    an array
+                                                                containing the
+                                                                result of the
+                                                                cartesian
+                                                                product of
+                                                                each array.
+
+        Examples:
+            >>> product([numpy.arange(2), numpy.arange(3)])
+            array([[0, 0],
+                   [0, 1],
+                   [0, 2],
+                   [1, 0],
+                   [1, 1],
+                   [1, 2]])
+
+            >>> product([
+            ...     numpy.arange(2, dtype=float),
+            ...     numpy.arange(3)
+            ... ])
+            array([[ 0.,  0.],
+                   [ 0.,  1.],
+                   [ 0.,  2.],
+                   [ 1.,  0.],
+                   [ 1.,  1.],
+                   [ 1.,  2.]])
+
+            >>> product([
+            ...     numpy.arange(2),
+            ...     numpy.arange(3),
+            ...     numpy.arange(4)
+            ... ])
+            array([[0, 0, 0],
+                   [0, 0, 1],
+                   [0, 0, 2],
+                   [0, 0, 3],
+                   [0, 1, 0],
+                   [0, 1, 1],
+                   [0, 1, 2],
+                   [0, 1, 3],
+                   [0, 2, 0],
+                   [0, 2, 1],
+                   [0, 2, 2],
+                   [0, 2, 3],
+                   [1, 0, 0],
+                   [1, 0, 1],
+                   [1, 0, 2],
+                   [1, 0, 3],
+                   [1, 1, 0],
+                   [1, 1, 1],
+                   [1, 1, 2],
+                   [1, 1, 3],
+                   [1, 2, 0],
+                   [1, 2, 1],
+                   [1, 2, 2],
+                   [1, 2, 3]])
+
+            >>> product(numpy.diag((1, 2, 3)))
+            array([[1, 0, 0],
+                   [1, 0, 0],
+                   [1, 0, 3],
+                   [1, 2, 0],
+                   [1, 2, 0],
+                   [1, 2, 3],
+                   [1, 0, 0],
+                   [1, 0, 0],
+                   [1, 0, 3],
+                   [0, 0, 0],
+                   [0, 0, 0],
+                   [0, 0, 3],
+                   [0, 2, 0],
+                   [0, 2, 0],
+                   [0, 2, 3],
+                   [0, 0, 0],
+                   [0, 0, 0],
+                   [0, 0, 3],
+                   [0, 0, 0],
+                   [0, 0, 0],
+                   [0, 0, 3],
+                   [0, 2, 0],
+                   [0, 2, 0],
+                   [0, 2, 3],
+                   [0, 0, 0],
+                   [0, 0, 0],
+                   [0, 0, 3]])
+    """
+
+    try:
+        xrange
+    except NameError:
+        xrange = range
+
+    for i in xrange(len(arrays)):
+        assert (arrays[i].ndim == 1), \
+               "Must provide only 1D arrays or a single 2D array."
+
+    array_shapes = tuple(len(arrays[i]) for i in xrange(len(arrays)))
+
+    result_shape = numpy.product(array_shapes), len(arrays)
+
+    result_dtype = numpy.find_common_type(
+        [arrays[i].dtype for i in xrange(result_shape[1])], []
+    )
+
+    result = numpy.empty(result_shape, dtype=result_dtype)
+    for i in xrange(result.shape[1]):
+        repeated_array_i = expand(
+            arrays[i],
+            shape_before=array_shapes[:i],
+            shape_after=array_shapes[i+1:]
+        )
+        for j, repeated_array_i_j in enumerate(repeated_array_i.flat):
+            result[j, i] = repeated_array_i_j
+
+    return(result)
