@@ -41,11 +41,14 @@ def expand(new_array,
             >>> numpy.arange(6).reshape(2,3)
             array([[0, 1, 2],
                    [3, 4, 5]])
+
             >>> expand(numpy.arange(6).reshape(2,3))
             array([[0, 1, 2],
                    [3, 4, 5]])
+
             >>> a = numpy.arange(6).reshape(2,3); a is expand(a)
             False
+
             >>> expand(numpy.arange(6).reshape(2,3), 1)
             array([[[0],
                     [1],
@@ -54,6 +57,7 @@ def expand(new_array,
                    [[3],
                     [4],
                     [5]]])
+
             >>> expand(numpy.arange(6).reshape(2,3), (1,))
             array([[[0],
                     [1],
@@ -62,6 +66,7 @@ def expand(new_array,
                    [[3],
                     [4],
                     [5]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_after=1)
             array([[[0],
                     [1],
@@ -70,6 +75,7 @@ def expand(new_array,
                    [[3],
                     [4],
                     [5]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_after=(1,))
             array([[[0],
                     [1],
@@ -78,12 +84,15 @@ def expand(new_array,
                    [[3],
                     [4],
                     [5]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_before=1)
             array([[[0, 1, 2],
                     [3, 4, 5]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_before=(1,))
             array([[[0, 1, 2],
                     [3, 4, 5]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_before=(3,))
             array([[[0, 1, 2],
                     [3, 4, 5]],
@@ -93,6 +102,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[0, 1, 2],
                     [3, 4, 5]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_after=(4,))
             array([[[0, 0, 0, 0],
                     [1, 1, 1, 1],
@@ -101,6 +111,7 @@ def expand(new_array,
                    [[3, 3, 3, 3],
                     [4, 4, 4, 4],
                     [5, 5, 5, 5]]])
+
             >>> expand(
             ...     numpy.arange(6).reshape((2,3)),
             ...     shape_before=(3,),
@@ -131,6 +142,7 @@ def expand(new_array,
                     [[3, 3, 3, 3],
                      [4, 4, 4, 4],
                      [5, 5, 5, 5]]]])
+
             >>> expand(numpy.arange(6).reshape((2,3)), shape_after = (4,3))
             array([[[[0, 0, 0],
                      [0, 0, 0],
@@ -162,6 +174,7 @@ def expand(new_array,
                      [5, 5, 5],
                      [5, 5, 5],
                      [5, 5, 5]]]])
+
             >>> expand(
             ...     numpy.arange(6).reshape((2,3)),
             ...     shape_before=(4,3),
