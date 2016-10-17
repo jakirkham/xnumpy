@@ -463,8 +463,7 @@ def product(arrays):
             arrays[i],
             shape_before=array_shapes[:i],
             shape_after=array_shapes[i+1:]
-        )
-        for j, repeated_array_i_j in enumerate(repeated_array_i.flat):
-            result[j, i] = repeated_array_i_j
+        ).flatten()
+        result[:, i] = repeated_array_i
 
     return(result)
