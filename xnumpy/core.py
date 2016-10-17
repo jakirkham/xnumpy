@@ -459,11 +459,11 @@ def product(arrays):
 
     result = numpy.empty(result_shape, dtype=result_dtype)
     for i in xrange(result.shape[1]):
-        repeated_array_i = expand(
+        repeated_array_i = numpy.ravel(expand(
             arrays[i],
             shape_before=array_shapes[:i],
             shape_after=array_shapes[i+1:]
-        ).flatten()
+        ))
         result[:, i] = repeated_array_i
 
     return(result)
