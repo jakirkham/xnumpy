@@ -25,7 +25,7 @@ xnumpy
 A Python utility library for working with expanded NumPy arrays.
 
 
-* Free software: BSD license
+* Free software: BSD 3-Clause
 * Documentation: https://xnumpy.readthedocs.io.
 
 
