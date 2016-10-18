@@ -467,3 +467,109 @@ def product(arrays):
         result[:, i] = repeated_array_i
 
     return(result)
+
+
+def permute_op(op, array_1, array_2):
+    """
+        Takes two arrays and constructs a new array that contains the result
+        of new_op on every permutation of elements in each array (like
+        broadcasting).
+
+        Suppose that new_result contained the result, then one would find that
+        the result of the following operation on the specific indices.
+
+        new_op( array_1[ i_1_1, i_1_2, ... ],
+                array_2[ i_2_1, i_2_2, ... ] )
+
+        would be found in new_result as shown
+
+        new_result[ i_1_1, i_1_2, ..., i_2_1, i_2_2, ... ]
+
+        Args:
+            new_array(numpy.ndarray):            array to add the singleton
+                                                 axis to.
+        Returns:
+            (numpy.ndarray):                     a numpy array with the
+                                                 singleton axis added at the
+                                                 end.
+        Examples:
+            >>> import operator
+            >>> permute_op(
+            ...     operator.add, numpy.ones((1,3)), numpy.eye(2)
+            ... ).shape
+            (1, 3, 2, 2)
+
+            >>> permute_op(
+            ...     operator.add, numpy.ones((2,2)), numpy.eye(2)
+            ... ).shape
+            (2, 2, 2, 2)
+
+            >>> permute_op(
+            ...     operator.add, numpy.ones((2,2)), numpy.eye(2)
+            ... )
+            array([[[[ 2.,  1.],
+                     [ 1.,  2.]],
+            <BLANKLINE>
+                    [[ 2.,  1.],
+                     [ 1.,  2.]]],
+            <BLANKLINE>
+            <BLANKLINE>
+                   [[[ 2.,  1.],
+                     [ 1.,  2.]],
+            <BLANKLINE>
+                    [[ 2.,  1.],
+                     [ 1.,  2.]]]])
+
+            >>> permute_op(
+            ...     operator.sub, numpy.ones((2,2)), numpy.eye(2)
+            ... )
+            array([[[[ 0.,  1.],
+                     [ 1.,  0.]],
+            <BLANKLINE>
+                    [[ 0.,  1.],
+                     [ 1.,  0.]]],
+            <BLANKLINE>
+            <BLANKLINE>
+                   [[[ 0.,  1.],
+                     [ 1.,  0.]],
+            <BLANKLINE>
+                    [[ 0.,  1.],
+                     [ 1.,  0.]]]])
+
+            >>> permute_op(
+            ...     operator.sub, numpy.ones((2,2)), numpy.fliplr(numpy.eye(2))
+            ... )
+            array([[[[ 1.,  0.],
+                     [ 0.,  1.]],
+            <BLANKLINE>
+                    [[ 1.,  0.],
+                     [ 0.,  1.]]],
+            <BLANKLINE>
+            <BLANKLINE>
+                   [[[ 1.,  0.],
+                     [ 0.,  1.]],
+            <BLANKLINE>
+                    [[ 1.,  0.],
+                     [ 0.,  1.]]]])
+
+            >>> permute_op(
+            ...     operator.sub, numpy.zeros((2,2)), numpy.eye(2)
+            ... )
+            array([[[[-1.,  0.],
+                     [ 0., -1.]],
+            <BLANKLINE>
+                    [[-1.,  0.],
+                     [ 0., -1.]]],
+            <BLANKLINE>
+            <BLANKLINE>
+                   [[[-1.,  0.],
+                     [ 0., -1.]],
+            <BLANKLINE>
+                    [[-1.,  0.],
+                     [ 0., -1.]]]])
+    """
+
+    array_1_tiled = expand(array_1, shape_after=array_2.shape)
+    array_2_tiled = expand(array_2, shape_before=array_1.shape)
+
+    return(op(array_1_tiled, array_2_tiled))
