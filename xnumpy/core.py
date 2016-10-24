@@ -343,6 +343,60 @@ def anumerate(new_array, axis=0, start=0, step=1, dtype=None):
     return(an_enumeration)
 
 
+def indices(shape, dtype=None):
+    """
+        Provides a function similar to ``numpy.indices``.
+
+        Very similar to ``numpy.indices`` except for the following.
+
+        * Only returns a tuple of the index arrays for each dimension.
+        * Returns an expanded view of a ``numpy.arange``s.
+
+        This result in drastic improvements in performance in terms of
+        time, memory usage, and cache retrieval.
+
+        To get an equivalent result to ``numpy.indices``, one merely
+        need to call ``numpy.array(indices(shape, dtype=int))``.
+
+        Args:
+
+            shape(``tuple`` of ``int``s):     array to enumerate
+            dtype(``type``):                  type to use for enumerating.
+
+        Returns:
+
+            ``tuple`` of ``numpy.ndarray``s:  a tuple of index arrays.
+
+        Examples:
+
+            >>> indices((2, 3))  # doctest: +NORMALIZE_WHITESPACE
+            (array([[0, 0, 0],
+                    [1, 1, 1]]),
+             array([[0, 1, 2],
+                    [0, 1, 2]]))
+    """
+
+    try:
+        xrange
+    except NameError:
+        xrange = range
+
+    if dtype is None:
+        dtype = int
+    dtype = numpy.dtype(dtype)
+
+    grid = []
+    for i in xrange(len(shape)):
+        grid.append(expand(
+            numpy.arange(shape[i], dtype=dtype),
+            shape_before=shape[:i],
+            shape_after=shape[i+1:]
+        ))
+    grid = tuple(grid)
+
+    return(grid)
+
+
 def product(arrays):
     """
         Takes the cartesian product between the elements in each array.
