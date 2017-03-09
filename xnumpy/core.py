@@ -143,7 +143,7 @@ def expand(new_array,
                      [4, 4, 4, 4],
                      [5, 5, 5, 5]]]])
 
-            >>> expand(numpy.arange(6).reshape((2,3)), shape_after = (4,3))
+            >>> expand(numpy.arange(6).reshape((2,3)), shape_after=(4,3))
             array([[[[0, 0, 0],
                      [0, 0, 0],
                      [0, 0, 0],
