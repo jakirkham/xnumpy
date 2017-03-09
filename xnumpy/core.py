@@ -38,7 +38,7 @@ def expand(new_array,
                                                  tiling in various dimension.
 
         Examples:
-            >>> a = numpy.arange(6).reshape(2,3)
+            >>> a = numpy.arange(6, dtype=numpy.int64).reshape(2,3)
             >>> a
             array([[0, 1, 2],
                    [3, 4, 5]])
@@ -346,7 +346,10 @@ def indices(shape, dtype=None):
 
         Examples:
 
-            >>> indices((2, 3))  # doctest: +NORMALIZE_WHITESPACE
+            >>> indices(
+            ...     (2, 3),
+            ...     dtype=numpy.int64
+            ... )  # doctest: +NORMALIZE_WHITESPACE
             (array([[0, 0, 0],
                     [1, 1, 1]]),
              array([[0, 1, 2],
@@ -391,7 +394,10 @@ def product(arrays):
                                                                 each array.
 
         Examples:
-            >>> product([numpy.arange(2), numpy.arange(3)])
+            >>> product([
+            ...     numpy.arange(2, dtype=numpy.int64),
+            ...     numpy.arange(3, dtype=numpy.int64)
+            ... ])
             array([[0, 0],
                    [0, 1],
                    [0, 2],
@@ -401,7 +407,7 @@ def product(arrays):
 
             >>> product([
             ...     numpy.arange(2, dtype=float),
-            ...     numpy.arange(3)
+            ...     numpy.arange(3, dtype=numpy.int64)
             ... ])
             array([[ 0.,  0.],
                    [ 0.,  1.],
@@ -411,9 +417,9 @@ def product(arrays):
                    [ 1.,  2.]])
 
             >>> product([
-            ...     numpy.arange(2),
-            ...     numpy.arange(3),
-            ...     numpy.arange(4)
+            ...     numpy.arange(2, dtype=numpy.int64),
+            ...     numpy.arange(3, dtype=numpy.int64),
+            ...     numpy.arange(4, dtype=numpy.int64)
             ... ])
             array([[0, 0, 0],
                    [0, 0, 1],
@@ -440,7 +446,7 @@ def product(arrays):
                    [1, 2, 2],
                    [1, 2, 3]])
 
-            >>> product(numpy.diag((1, 2, 3)))
+            >>> product(numpy.diag((1, 2, 3)).astype(numpy.int64))
             array([[1, 0, 0],
                    [1, 0, 0],
                    [1, 0, 3],
