@@ -38,14 +38,14 @@ def expand(new_array,
                                                  tiling in various dimension.
 
         Examples:
-            >>> a = numpy.arange(6).reshape(2,3)
+            >>> a = numpy.arange(6, dtype=numpy.uint64).reshape(2,3)
             >>> a
             array([[0, 1, 2],
-                   [3, 4, 5]])
+                   [3, 4, 5]], dtype=uint64)
 
             >>> expand(a)
             array([[0, 1, 2],
-                   [3, 4, 5]])
+                   [3, 4, 5]], dtype=uint64)
 
             >>> a is expand(a)
             False
@@ -57,7 +57,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, (1,))
             array([[[0],
@@ -66,7 +66,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, shape_after=1)
             array([[[0],
@@ -75,7 +75,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, shape_after=(1,))
             array([[[0],
@@ -84,15 +84,15 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, shape_before=1)
             array([[[0, 1, 2],
-                    [3, 4, 5]]])
+                    [3, 4, 5]]], dtype=uint64)
 
             >>> expand(a, shape_before=(1,))
             array([[[0, 1, 2],
-                    [3, 4, 5]]])
+                    [3, 4, 5]]], dtype=uint64)
 
             >>> expand(a, shape_before=(3,))
             array([[[0, 1, 2],
@@ -102,7 +102,7 @@ def expand(new_array,
                     [3, 4, 5]],
             <BLANKLINE>
                    [[0, 1, 2],
-                    [3, 4, 5]]])
+                    [3, 4, 5]]], dtype=uint64)
 
             >>> expand(a, shape_after=(4,))
             array([[[0, 0, 0, 0],
@@ -111,7 +111,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3, 3, 3, 3],
                     [4, 4, 4, 4],
-                    [5, 5, 5, 5]]])
+                    [5, 5, 5, 5]]], dtype=uint64)
 
             >>> expand(
             ...     a,
@@ -142,7 +142,7 @@ def expand(new_array,
             <BLANKLINE>
                     [[3, 3, 3, 3],
                      [4, 4, 4, 4],
-                     [5, 5, 5, 5]]]])
+                     [5, 5, 5, 5]]]], dtype=uint64)
 
             >>> expand(a, shape_after=(4,3))
             array([[[[0, 0, 0],
@@ -174,7 +174,7 @@ def expand(new_array,
                     [[5, 5, 5],
                      [5, 5, 5],
                      [5, 5, 5],
-                     [5, 5, 5]]]])
+                     [5, 5, 5]]]], dtype=uint64)
 
             >>> expand(
             ...     a,
@@ -217,7 +217,7 @@ def expand(new_array,
                      [3, 4, 5]],
             <BLANKLINE>
                     [[0, 1, 2],
-                     [3, 4, 5]]]])
+                     [3, 4, 5]]]], dtype=uint64)
     """
 
     if not isinstance(shape_after, tuple):
@@ -346,11 +346,14 @@ def indices(shape, dtype=None):
 
         Examples:
 
-            >>> indices((2, 3))  # doctest: +NORMALIZE_WHITESPACE
+            >>> indices(
+            ...     (2, 3),
+            ...     dtype=numpy.uint64
+            ... )  # doctest: +NORMALIZE_WHITESPACE
             (array([[0, 0, 0],
-                    [1, 1, 1]]),
+                    [1, 1, 1]], dtype=uint64),
              array([[0, 1, 2],
-                    [0, 1, 2]]))
+                    [0, 1, 2]], dtype=uint64))
     """
 
     try:
@@ -391,17 +394,20 @@ def product(arrays):
                                                                 each array.
 
         Examples:
-            >>> product([numpy.arange(2), numpy.arange(3)])
+            >>> product([
+            ...     numpy.arange(2, dtype=numpy.uint64),
+            ...     numpy.arange(3, dtype=numpy.uint64)
+            ... ])
             array([[0, 0],
                    [0, 1],
                    [0, 2],
                    [1, 0],
                    [1, 1],
-                   [1, 2]])
+                   [1, 2]], dtype=uint64)
 
             >>> product([
             ...     numpy.arange(2, dtype=float),
-            ...     numpy.arange(3)
+            ...     numpy.arange(3, dtype=numpy.uint64)
             ... ])
             array([[ 0.,  0.],
                    [ 0.,  1.],
@@ -411,9 +417,9 @@ def product(arrays):
                    [ 1.,  2.]])
 
             >>> product([
-            ...     numpy.arange(2),
-            ...     numpy.arange(3),
-            ...     numpy.arange(4)
+            ...     numpy.arange(2, dtype=numpy.uint64),
+            ...     numpy.arange(3, dtype=numpy.uint64),
+            ...     numpy.arange(4, dtype=numpy.uint64)
             ... ])
             array([[0, 0, 0],
                    [0, 0, 1],
@@ -438,9 +444,9 @@ def product(arrays):
                    [1, 2, 0],
                    [1, 2, 1],
                    [1, 2, 2],
-                   [1, 2, 3]])
+                   [1, 2, 3]], dtype=uint64)
 
-            >>> product(numpy.diag((1, 2, 3)))
+            >>> product(numpy.diag((1, 2, 3)).astype(numpy.uint64))
             array([[1, 0, 0],
                    [1, 0, 0],
                    [1, 0, 3],
@@ -467,7 +473,7 @@ def product(arrays):
                    [0, 2, 3],
                    [0, 0, 0],
                    [0, 0, 0],
-                   [0, 0, 3]])
+                   [0, 0, 3]], dtype=uint64)
     """
 
     try:
@@ -524,14 +530,14 @@ def permute_op(op, array_1, array_2):
                                                  end.
         Examples:
             >>> import operator
-            >>> permute_op(
+            >>> tuple(int(s) for s in permute_op(
             ...     operator.add, numpy.ones((1,3)), numpy.eye(2)
-            ... ).shape
+            ... ).shape)
             (1, 3, 2, 2)
 
-            >>> permute_op(
+            >>> tuple(int(s) for s in permute_op(
             ...     operator.add, numpy.ones((2,2)), numpy.eye(2)
-            ... ).shape
+            ... ).shape)
             (2, 2, 2, 2)
 
             >>> permute_op(
