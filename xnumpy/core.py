@@ -358,8 +358,7 @@ def indices(shape, dtype=None):
     except NameError:
         xrange = range
 
-    if dtype is None:
-        dtype = int
+    dtype = dtype if dtype is not None else int
     dtype = numpy.dtype(dtype)
 
     grid = []
