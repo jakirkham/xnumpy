@@ -58,3 +58,6 @@ docs/xnumpy*.rst
 
 # PyBuilder
 target/
+
+# pyenv python configuration file
+.python-version
