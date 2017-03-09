@@ -524,14 +524,14 @@ def permute_op(op, array_1, array_2):
                                                  end.
         Examples:
             >>> import operator
-            >>> permute_op(
+            >>> tuple(int(s) for s in permute_op(
             ...     operator.add, numpy.ones((1,3)), numpy.eye(2)
-            ... ).shape
+            ... ).shape)
             (1, 3, 2, 2)
 
-            >>> permute_op(
+            >>> tuple(int(s) for s in permute_op(
             ...     operator.add, numpy.ones((2,2)), numpy.eye(2)
-            ... ).shape
+            ... ).shape)
             (2, 2, 2, 2)
 
             >>> permute_op(
