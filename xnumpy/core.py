@@ -38,14 +38,14 @@ def expand(new_array,
                                                  tiling in various dimension.
 
         Examples:
-            >>> a = numpy.arange(6, dtype=numpy.int64).reshape(2,3)
+            >>> a = numpy.arange(6, dtype=numpy.uint64).reshape(2,3)
             >>> a
             array([[0, 1, 2],
-                   [3, 4, 5]])
+                   [3, 4, 5]], dtype=uint64)
 
             >>> expand(a)
             array([[0, 1, 2],
-                   [3, 4, 5]])
+                   [3, 4, 5]], dtype=uint64)
 
             >>> a is expand(a)
             False
@@ -57,7 +57,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, (1,))
             array([[[0],
@@ -66,7 +66,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, shape_after=1)
             array([[[0],
@@ -75,7 +75,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, shape_after=(1,))
             array([[[0],
@@ -84,15 +84,15 @@ def expand(new_array,
             <BLANKLINE>
                    [[3],
                     [4],
-                    [5]]])
+                    [5]]], dtype=uint64)
 
             >>> expand(a, shape_before=1)
             array([[[0, 1, 2],
-                    [3, 4, 5]]])
+                    [3, 4, 5]]], dtype=uint64)
 
             >>> expand(a, shape_before=(1,))
             array([[[0, 1, 2],
-                    [3, 4, 5]]])
+                    [3, 4, 5]]], dtype=uint64)
 
             >>> expand(a, shape_before=(3,))
             array([[[0, 1, 2],
@@ -102,7 +102,7 @@ def expand(new_array,
                     [3, 4, 5]],
             <BLANKLINE>
                    [[0, 1, 2],
-                    [3, 4, 5]]])
+                    [3, 4, 5]]], dtype=uint64)
 
             >>> expand(a, shape_after=(4,))
             array([[[0, 0, 0, 0],
@@ -111,7 +111,7 @@ def expand(new_array,
             <BLANKLINE>
                    [[3, 3, 3, 3],
                     [4, 4, 4, 4],
-                    [5, 5, 5, 5]]])
+                    [5, 5, 5, 5]]], dtype=uint64)
 
             >>> expand(
             ...     a,
@@ -142,7 +142,7 @@ def expand(new_array,
             <BLANKLINE>
                     [[3, 3, 3, 3],
                      [4, 4, 4, 4],
-                     [5, 5, 5, 5]]]])
+                     [5, 5, 5, 5]]]], dtype=uint64)
 
             >>> expand(a, shape_after=(4,3))
             array([[[[0, 0, 0],
@@ -174,7 +174,7 @@ def expand(new_array,
                     [[5, 5, 5],
                      [5, 5, 5],
                      [5, 5, 5],
-                     [5, 5, 5]]]])
+                     [5, 5, 5]]]], dtype=uint64)
 
             >>> expand(
             ...     a,
@@ -217,7 +217,7 @@ def expand(new_array,
                      [3, 4, 5]],
             <BLANKLINE>
                     [[0, 1, 2],
-                     [3, 4, 5]]]])
+                     [3, 4, 5]]]], dtype=uint64)
     """
 
     if not isinstance(shape_after, tuple):
@@ -348,12 +348,12 @@ def indices(shape, dtype=None):
 
             >>> indices(
             ...     (2, 3),
-            ...     dtype=numpy.int64
+            ...     dtype=numpy.uint64
             ... )  # doctest: +NORMALIZE_WHITESPACE
             (array([[0, 0, 0],
-                    [1, 1, 1]]),
+                    [1, 1, 1]], dtype=uint64),
              array([[0, 1, 2],
-                    [0, 1, 2]]))
+                    [0, 1, 2]], dtype=uint64))
     """
 
     try:
@@ -395,19 +395,19 @@ def product(arrays):
 
         Examples:
             >>> product([
-            ...     numpy.arange(2, dtype=numpy.int64),
-            ...     numpy.arange(3, dtype=numpy.int64)
+            ...     numpy.arange(2, dtype=numpy.uint64),
+            ...     numpy.arange(3, dtype=numpy.uint64)
             ... ])
             array([[0, 0],
                    [0, 1],
                    [0, 2],
                    [1, 0],
                    [1, 1],
-                   [1, 2]])
+                   [1, 2]], dtype=uint64)
 
             >>> product([
             ...     numpy.arange(2, dtype=float),
-            ...     numpy.arange(3, dtype=numpy.int64)
+            ...     numpy.arange(3, dtype=numpy.uint64)
             ... ])
             array([[ 0.,  0.],
                    [ 0.,  1.],
@@ -417,9 +417,9 @@ def product(arrays):
                    [ 1.,  2.]])
 
             >>> product([
-            ...     numpy.arange(2, dtype=numpy.int64),
-            ...     numpy.arange(3, dtype=numpy.int64),
-            ...     numpy.arange(4, dtype=numpy.int64)
+            ...     numpy.arange(2, dtype=numpy.uint64),
+            ...     numpy.arange(3, dtype=numpy.uint64),
+            ...     numpy.arange(4, dtype=numpy.uint64)
             ... ])
             array([[0, 0, 0],
                    [0, 0, 1],
@@ -444,9 +444,9 @@ def product(arrays):
                    [1, 2, 0],
                    [1, 2, 1],
                    [1, 2, 2],
-                   [1, 2, 3]])
+                   [1, 2, 3]], dtype=uint64)
 
-            >>> product(numpy.diag((1, 2, 3)).astype(numpy.int64))
+            >>> product(numpy.diag((1, 2, 3)).astype(numpy.uint64))
             array([[1, 0, 0],
                    [1, 0, 0],
                    [1, 0, 3],
@@ -473,7 +473,7 @@ def product(arrays):
                    [0, 2, 3],
                    [0, 0, 0],
                    [0, 0, 0],
-                   [0, 0, 3]])
+                   [0, 0, 3]], dtype=uint64)
     """
 
     try:
