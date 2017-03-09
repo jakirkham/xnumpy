@@ -256,69 +256,45 @@ def anumerate(new_array, axis=0, start=0, step=1, dtype=None):
             (numpy.ndarray):                     a view of a numpy arange with
                                                  tiling in various dimension.
         Examples:
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64)
-            ... )
+            >>> a = numpy.ones((4,5), dtype=numpy.uint64)
+
+            >>> anumerate(a)
             array([[0, 0, 0, 0, 0],
                    [1, 1, 1, 1, 1],
                    [2, 2, 2, 2, 2],
                    [3, 3, 3, 3, 3]], dtype=uint64)
 
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64),
-            ...     axis=0
-            ... )
+            >>> anumerate(a, axis=0)
             array([[0, 0, 0, 0, 0],
                    [1, 1, 1, 1, 1],
                    [2, 2, 2, 2, 2],
                    [3, 3, 3, 3, 3]], dtype=uint64)
 
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64),
-            ...     axis=0,
-            ...     start=1
-            ... )
+            >>> anumerate(a, axis=0, start=1)
             array([[1, 1, 1, 1, 1],
                    [2, 2, 2, 2, 2],
                    [3, 3, 3, 3, 3],
                    [4, 4, 4, 4, 4]], dtype=uint64)
 
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64),
-            ...     axis=0,
-            ...     start=1,
-            ...     step=2
-            ... )
+            >>> anumerate(a, axis=0, start=1, step=2)
             array([[1, 1, 1, 1, 1],
                    [3, 3, 3, 3, 3],
                    [5, 5, 5, 5, 5],
                    [7, 7, 7, 7, 7]], dtype=uint64)
 
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64),
-            ...     axis=1
-            ... )
+            >>> anumerate(a, axis=1)
             array([[0, 1, 2, 3, 4],
                    [0, 1, 2, 3, 4],
                    [0, 1, 2, 3, 4],
                    [0, 1, 2, 3, 4]], dtype=uint64)
 
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64),
-            ...     axis=1,
-            ...     start=1
-            ... )
+            >>> anumerate(a, axis=1, start=1)
             array([[1, 2, 3, 4, 5],
                    [1, 2, 3, 4, 5],
                    [1, 2, 3, 4, 5],
                    [1, 2, 3, 4, 5]], dtype=uint64)
 
-            >>> anumerate(
-            ...     numpy.ones((4,5), dtype=numpy.uint64),
-            ...     axis=1,
-            ...     start=1,
-            ...     step=2
-            ... )
+            >>> anumerate(a, axis=1, start=1, step=2)
             array([[1, 3, 5, 7, 9],
                    [1, 3, 5, 7, 9],
                    [1, 3, 5, 7, 9],
