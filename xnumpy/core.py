@@ -38,6 +38,7 @@ def expand(new_array,
                                                  tiling in various dimension.
 
         Examples:
+
             >>> a = numpy.arange(6, dtype=numpy.uint64).reshape(2,3)
             >>> a
             array([[0, 1, 2],
